@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+void magicSquare(int arr[][5], int row, int col)
+{
+    int mid = col / 2;
+    row = 0;
+    col = mid;
+    arr[0][mid] = 1;
+    int value = 2;
+    while (value <= 25)
+    {
+        row = (row -1 + 5)%5;
+        col = (col -1 + 5)%5;
+
+        if (arr[row][col] == 0)
+        {
+
+            if ((row >= 0 && row <= 4) && (col >= 0 && col <= 4))
+            {
+                arr[row][col] = value;
+                value++;
+            }
+            else if (row < 0)
+            {
+                int row = row + 5;
+                arr[row][col] = value;
+                value++;
+            }
+            else if (col < 0)
+            {
+                int col = col + 5;
+                arr[row][col] = value;
+                value++;
+            }
+        }
+        else {
+            row=(row+2)%5;
+            col=(col+1)%5;
+        }
+    }
+}
+
+int printMatrix(int arr[][5])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cout << arr[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+int main()
+{
+    int arr[5][5] = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cout << arr[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    magicSquare(arr, 5, 5);
+    cout << endl;
+    printMatrix(arr);
+    return 0;
+}
